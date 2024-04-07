@@ -10,7 +10,7 @@ const PokemonList: React.FC = () => {
     return (
         <div>
           {pokemonList.map((pokemon) => ( 
-            <div key={pokemon.name}>{pokemon.name}</div>
+            <div>{pokemon.name}</div>
           ))}
         </div>
       );
