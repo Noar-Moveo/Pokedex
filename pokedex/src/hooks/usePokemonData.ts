@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Pokemon, UsePokemonDataReturn, ErrorType, API_URL } from "../types"
+import { Pokemon, UsePokemonDataReturn, ErrorType, API_URL } from "../data/types"
 
 export const usePokemonData = (): UsePokemonDataReturn => {
     const [data, setData] = useState<Pokemon[]>([]);
