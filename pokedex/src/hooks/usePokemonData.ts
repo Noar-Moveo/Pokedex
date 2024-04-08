@@ -12,7 +12,7 @@ interface Pokemon {
     error: Error | null;
   }
 
-const API_URL = "https://pokeapi.co/api/v2/pokemon?limit=151";
+const API_URL = "https://pokeapi.co/api/v2/pokemon?limit=100000";
 
 export const usePokemonData = (): UsePokemonDataReturn => {
     const [data, setData] = useState<any[]>([]);
