@@ -1,23 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-interface Pokemon {
-    name: string;
-    url: string;
-  }
-  
-  interface UsePokemonDataReturn {
-    data: Pokemon[];
-    loading: boolean;
-    error: Error | null;
-  }
-
-const API_URL = "https://pokeapi.co/api/v2/pokemon?limit=100000";
+import { Pokemon, UsePokemonDataReturn, ErrorType, API_URL } from "../types"
 
 export const usePokemonData = (): UsePokemonDataReturn => {
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<Error | null>(null);
+    const [error, setError] = useState<ErrorType>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,7 +14,7 @@ export const usePokemonData = (): UsePokemonDataReturn => {
                 const response = await axios.get(API_URL);
                 setData(response.data.results);
             } catch (error) {
-                setError(error as Error);
+                setError(error as Error); // Cast error to ErrorType
             } finally {
                 setLoading(false);
             }
@@ -35,5 +23,4 @@ export const usePokemonData = (): UsePokemonDataReturn => {
     }, []);
 
     return { data, loading, error };
-
 }
