@@ -1,5 +1,4 @@
-//import React from "react";
-import { usePokemonData } from '../hooks/usePokemonData.ts';
+import { usePokemonData } from '../hooks/usePokemonData'
 
 const PokemonList: React.FC = () => {
     const { data: pokemonList, loading, error } = usePokemonData();
