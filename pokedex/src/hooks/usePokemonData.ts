@@ -12,13 +12,22 @@ export const usePokemonData = (): UsePokemonDataReturn => {
             setLoading(true);
             try {
                 const response = await axios.get(API_URL);
-                setData(response.data.results);
+                const transformedData = response.data.results.map((pokemon: any) => {
+                    const id = pokemon.url.split('/').filter(Boolean).pop();
+                    return {
+                        ...pokemon,
+                        id: Number(id),
+                        imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+                    };
+                });
+                setData(transformedData);
             } catch (error) {
                 setError(error as Error); // Cast error to ErrorType
             } finally {
                 setLoading(false);
             }
         };
+
         fetchData();
     }, []);
 
