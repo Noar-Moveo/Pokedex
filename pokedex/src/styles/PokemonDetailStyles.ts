@@ -20,9 +20,9 @@ export const DetailContainer = styled.div`
 
 export const DetailHeader = styled.h1`
   position: absolute;
-  top: 280px;
+  top: 290px;
   left: 71px;
-  font-size: 25px;
+  font-size: 22px;
   color: #373299;
   font-family: 'Roboto';
   margin: 0;

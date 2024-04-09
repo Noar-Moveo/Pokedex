@@ -29,6 +29,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
   return (
     <>
       <ListContainer>
+
         {filteredPokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}
