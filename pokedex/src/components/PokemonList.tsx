@@ -3,15 +3,17 @@ import { usePokemonData } from "../hooks/usePokemonData";
 import PokemonCard from "./PokemonCard";
 import { ListContainer } from "../styles/PokemonCardStyles";
 import { LoadMoreButton } from "../styles/HomePageStyles";
-import { PokemonListProps, Pokemon } from "../data/types";
+import { PokemonListProps } from "../data/types";
 
 const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
-  const { data: pokemons, loading, error } = usePokemonData();
+  const { data, loading, error } = usePokemonData(); 
   const [displayLimit, setDisplayLimit] = useState(12);
+
+  const pokemons = Array.isArray(data) ? data : [];
 
   const filteredPokemons = searchTerm
     ? pokemons
-        .filter((pokemon: Pokemon) =>
+        .filter((pokemon) => 
           pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .slice(0, displayLimit)
@@ -27,7 +29,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
   return (
     <>
       <ListContainer>
-        {filteredPokemons.map((pokemon: Pokemon) => (
+        {filteredPokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}
             id={pokemon.id}
@@ -45,3 +47,4 @@ const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
 };
 
 export default PokemonList;
+

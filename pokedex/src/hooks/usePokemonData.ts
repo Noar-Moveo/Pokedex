@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Pokemon, UsePokemonDataReturn, ErrorType, API_URL } from "../data/types"
@@ -21,10 +22,12 @@ export const usePokemonData = (): UsePokemonDataReturn => {
                 id: pokedexNumber,
                 imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png`
             };
+
+  
             });
             setData(transformedData);
           } catch (error) {
-            setError(error as Error); // Cast error to ErrorType
+            setError(error as Error); 
           } finally {
             setLoading(false);
           }
@@ -33,5 +36,18 @@ export const usePokemonData = (): UsePokemonDataReturn => {
         fetchData();
       }, []);
     
-      return { data, loading, error };
+      const fetchPokemonDetails = async (id: number) => {
+        try {
+            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+            return response.data;
+        } catch (error) {
+            setError(error as Error);
+            throw error; 
+        }
     };
+
+    return { data, loading, error, fetchPokemonDetails };
+};
+
+
+    

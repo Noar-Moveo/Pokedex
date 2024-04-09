@@ -4,9 +4,9 @@ export const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px 26.73px;
-  margin: 174px auto 0;
-  padding: 32px;
-  justify-content: center;
+    //margin: 174px 20px; 
+  padding: 200px 50px;
+  justify-content: c4enter;
   align-items: center;
 
   @media (max-width: 1200px) {

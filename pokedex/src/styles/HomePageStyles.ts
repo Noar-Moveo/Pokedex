@@ -75,7 +75,7 @@ export const SearchButton = styled.button`
 export const LoadMoreButton = styled.button`
   width: 210px;
   height: 36px;
-  margin: 80px auto 80px;
+  margin: -100px auto 80px;
   display: block;
   border-radius: 9px;
   border: 1px solid #373299;
