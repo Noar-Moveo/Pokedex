@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Pokemon, UsePokemonDataReturn, ErrorType, API_URL } from "../data/types";
+import { Pokemon, UsePokemonDataReturn, ErrorType, API_URL } from "../data/types"
 
 export const usePokemonData = (): UsePokemonDataReturn => {
     const [data, setData] = useState<Pokemon[]>([]);
@@ -19,12 +19,12 @@ export const usePokemonData = (): UsePokemonDataReturn => {
               return {
                 ...pokemon,
                 id: pokedexNumber,
-                imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png`
+                imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png` 
               };
             });
             setData(transformedData);
           } catch (error) {
-            setError(error as Error); // Cast error to ErrorType
+            setError(error as Error); 
           } finally {
             setLoading(false);
           }

@@ -8,7 +8,7 @@ import {
   SearchButton,
   SearchInput,
   Logo,
-  NonClickableBox,
+  NonClickableBox
 } from "./styles/HomePageStyles";
 import LogoImage from "./LogoImage.png";
 
@@ -27,7 +27,7 @@ function App() {
   return (
     <div>
       <TopLine>
-        <Logo src={LogoImage} alt="Pokédex Logo" />
+      <Logo src={LogoImage} alt="Pokédex Logo" />
         <HomeBox>
           <BoxText>Home</BoxText>
         </HomeBox>
