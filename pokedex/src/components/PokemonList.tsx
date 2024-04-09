@@ -33,6 +33,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
             id={pokemon.id}
             name={pokemon.name}
             imageUrl={pokemon.imageUrl}
+            url={pokemon.url}
           />
         ))}
       </ListContainer>
