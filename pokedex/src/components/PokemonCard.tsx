@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Number, PokemonImage, Name } from "../styles/PokemonCardStyles";
-import { PokemonCardProps } from "../data/types";
+import { Pokemon } from "../data/types";
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, imageUrl }) => {
+const PokemonCard: React.FC<Pokemon> = ({ id, name, imageUrl }) => {
   return (
     <Card>
       <Number>#{id.toString().padStart(3, "0")}</Number>
