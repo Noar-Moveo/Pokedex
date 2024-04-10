@@ -1,4 +1,3 @@
-import React, { ReactNode } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import PokemonDetailPage from './pages/PokemonDetailPage';
@@ -11,10 +10,8 @@ import {
     NonClickableBox
 } from "./styles/HomePageStyles";
 import LogoImage from "./LogoImage.png";
+import { LayoutProps } from "./data/types";
 
-type LayoutProps = {
-  children: ReactNode;
-};
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
@@ -25,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <FavoriteBox><BoxText>Favorite</BoxText></FavoriteBox>
         <NonClickableBox />
       </TopLine>
-      <main>{children}</main>
+      <main style={{ backgroundColor: 'white' }}>{children}</main> 
     </>
   );
 };

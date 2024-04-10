@@ -12,12 +12,20 @@ const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
   const pokemons = Array.isArray(data) ? data : [];
 
   const filteredPokemons = searchTerm
-    ? pokemons
-        .filter((pokemon) => 
-          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .slice(0, displayLimit)
-    : pokemons.slice(0, displayLimit);
+  ? pokemons.filter((pokemon) => {
+      const searchTermLower = searchTerm.toLowerCase();
+      const nameMatch = pokemon.name.toLowerCase().includes(searchTermLower);
+      const idMatch = pokemon.id.toString().includes(searchTermLower);
+      const typeMatch = pokemon.types?.some(type => {
+         type.type.name.toLowerCase().includes(searchTermLower);
+      }) || false;
+      
+
+      return nameMatch || idMatch || typeMatch;
+    })
+    .slice(0, displayLimit)
+  : pokemons.slice(0, displayLimit);
+
 
   const handleLoadMore = () => {
     setDisplayLimit((prevLimit) => prevLimit + 12);
@@ -29,7 +37,6 @@ const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
   return (
     <>
       <ListContainer>
-
         {filteredPokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}

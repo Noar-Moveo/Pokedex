@@ -6,14 +6,13 @@ import {
   ErrorType,
   FlavorTextEntry,
   SpeciesResponse,
+  typeColors,
 } from "../data/types";
 import {
   DetailContainer,
   DetailHeader,
   TypeContainer,
   PokemonImage,
-  GrassTypeBox,
-  PoisonTypeBox,
   VerticalLine,
   DescriptionHeadline,
   DescriptionText,
@@ -22,9 +21,10 @@ import {
   StatItem,
   BackButton,
   ArrowIndicator,
-  Number
+  Number,
+  TypeBox,
+  ImageHeaderContainer
 } from "../styles/PokemonDetailStyles";
-
 
 const PokemonDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,7 +37,6 @@ const PokemonDetailPage = () => {
   const formattedId = useMemo(() => {
     return `#${id?.toString().padStart(3, "0") || ""}`;
   }, [id]);
-  
 
   useEffect(() => {
     const fetchPokemonDetails = async () => {
@@ -78,29 +77,50 @@ const PokemonDetailPage = () => {
     0
   );
 
+  const getTypeColor = (typeName: string): string => {
+    return typeColors[typeName.toLowerCase()];
+  };
+
+  const getTypeBox = (typeName: string) => {
+    return (
+      <TypeBox
+        key={typeName}
+        style={{ backgroundColor: getTypeColor(typeName) }}
+      >
+        {typeName.charAt(0).toUpperCase() + typeName.slice(1).toLowerCase()}
+      </TypeBox>
+    );
+  };
+
+   const formatStatName = (name: string) => {
+    return name.toLowerCase() === "hp" ? "HP" : name
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+  
 
   return (
     <DetailContainer>
-      <DetailHeader>{pokemonDetail.name.toUpperCase()}</DetailHeader>
-      <PokemonImage
-        src={pokemonDetail.sprites.front_default}
-        alt={pokemonDetail.name}
-        draggable="false"
-      />
+      <ImageHeaderContainer>
+        <DetailHeader>{pokemonDetail.name.toUpperCase()}</DetailHeader>
+        <PokemonImage
+          src={pokemonDetail.sprites.front_default}
+          alt={pokemonDetail.name}
+          draggable="false"
+        />
+        <TypeContainer>
+          {pokemonDetail.types.map((typeInfo) => getTypeBox(typeInfo.type.name))}
+        </TypeContainer>
+      </ImageHeaderContainer>
+      {/* Render description, stats, and other details here */}
       <DescriptionHeadline>Description</DescriptionHeadline>
       <DescriptionText>{pokemonDetail.description}</DescriptionText>
-      <TypeContainer>
-        <GrassTypeBox>GRASS</GrassTypeBox>
-        <PoisonTypeBox>POISON</PoisonTypeBox>
-      </TypeContainer>
       <StatsHeadline>Stats</StatsHeadline>
       <StatsContainer>
         {pokemonDetail.stats.map((stat, index) => (
           <StatItem key={index}>
-            <span>
-              {stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}
-              :{" "}
-            </span>
+            <span>{formatStatName(stat.stat.name)}: </span>
             <span>{stat.base_stat}</span>
           </StatItem>
         ))}
@@ -117,6 +137,7 @@ const PokemonDetailPage = () => {
       <Number>{formattedId}</Number>
     </DetailContainer>
   );
+  
 };
 
 export default PokemonDetailPage;

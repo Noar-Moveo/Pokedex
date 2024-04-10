@@ -22,7 +22,6 @@ export const usePokemonData = (): UsePokemonDataReturn => {
                 id: pokedexNumber,
                 imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png`
             };
-
   
             });
             setData(transformedData);
@@ -36,17 +35,8 @@ export const usePokemonData = (): UsePokemonDataReturn => {
         fetchData();
       }, []);
     
-      const fetchPokemonDetails = async (id: number) => {
-        try {
-            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            return response.data;
-        } catch (error) {
-            setError(error as Error);
-            throw error; 
-        }
-    };
 
-    return { data, loading, error, fetchPokemonDetails };
+    return { data, loading, error };
 };
 
 

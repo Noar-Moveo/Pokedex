@@ -20,19 +20,28 @@ export const DetailContainer = styled.div`
 
 export const DetailHeader = styled.h1`
   position: absolute;
-  top: 290px;
-  left: 71px;
+  bottom: 10px; 
+  left: 50%; 
+  transform: translateX(-50%); 
   font-size: 22px;
   color: #373299;
   font-family: 'Roboto';
   margin: 0;
 `;
 
+export const ImageHeaderContainer = styled.div`
+  position: relative; 
+  width: 337px; 
+  height: 311px; 
+  left: -291px; 
+  top: -30px; 
+`;
+
 export const PokemonImage = styled.img` 
-  position: absolute; 
-  top: 20px; 
-  left: 0px;
-  width: 337; 
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 330px; 
   height: 291px; 
   opacity: 1;
 `;
@@ -72,30 +81,26 @@ export const DescriptionText = styled.p`
 
 export const TypeContainer = styled.div`
   position: absolute; 
-  top: 322px; 
-  left: 37px; 
+  top: calc(100% + 10px); 
+  left: 50%; 
+  transform: translateX(-50%);
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
 
 export const TypeBox = styled.div`
   width: 100px;
   height: 35px;
-  border-radius: 9px 0px 0px 0px;
+  border-radius: 9px;
   opacity: 1; 
-  font-size: 14px;
+  font-size: 18px;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 8px; 
-`;
-
-export const GrassTypeBox = styled(TypeBox)`
-  background: #7AC74C;
-`;
-
-export const PoisonTypeBox = styled(TypeBox)`
-  background: #A33EA1;
 `;
 
 
@@ -142,6 +147,8 @@ export const StatItem = styled.div`
   display: flex; 
   align-items: center; 
   margin-bottom: 8px; 
+  white-space: nowrap; 
+  align-items: center;
 `;
 
 export const BackButton = styled.button`

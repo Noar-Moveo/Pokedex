@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+const mobileBreakpoint = "600px";
+
+
 export const TopLine = styled.div`
   height: 67px;
   background-color: #020166;
@@ -11,6 +14,10 @@ export const TopLine = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 0 106px 0 20px;
+  z-index: 1;
+  @media (max-width: ${mobileBreakpoint}) {
+    display: none; 
+  }
 `;
 
 export const Box = styled.div`
@@ -20,6 +27,7 @@ export const Box = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  
 `;
 
 export const HomeBox = styled(Box)`
@@ -54,9 +62,11 @@ export const SearchInput = styled.input`
   position: absolute;
   top: 123px;
   left: 428px;
-  border-radius: 9px 0 0 0;
+  border-radius: 9px;
   border: 1px solid #02016680;
   background: #f7f7f9;
+  margin-right: 5px;
+
 `;
 
 export const SearchButton = styled.button`
@@ -70,6 +80,7 @@ export const SearchButton = styled.button`
   color: #ffffff;
   cursor: pointer;
   border: none;
+  margin-left: 5px;
 `;
 
 export const LoadMoreButton = styled.button`
@@ -96,3 +107,7 @@ export const Logo = styled.img`
   left: 110px;
   opacity: 1;
 `;
+
+
+
+
