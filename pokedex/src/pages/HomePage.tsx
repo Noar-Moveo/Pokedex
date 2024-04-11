@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PokemonList from "../components/PokemonList";
-import { SearchButton, SearchInput } from "../styles/HomePageStyles";
-import { SearchItem,DeleteButton, SearchPopup, RecentSearchHeader, HeaderContainer, ClearText } from "../styles/SearchStyles.ts";
+import { Container, SearchButton, SearchInput } from "../styles/HomePageStyles";
+import { SearchItem,DeleteButton, SearchPopup, RecentSearchHeader, HeaderContainer, ClearText, SearchArea } from "../styles/SearchStyles.ts";
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -49,11 +49,11 @@ function HomePage() {
   };
 
   return (
-    <div>
-      <div ref={searchRef}>
+    <Container>
+      <SearchArea ref={searchRef}>
         <SearchInput
           type="text"
-          placeholder="Search"
+          placeholder="Search Pokémon"
           value={searchTerm}
           onChange={handleSearchChange}
           onFocus={() => setShowRecentSearches(true)}
@@ -73,9 +73,9 @@ function HomePage() {
             ))}
           </SearchPopup>
         )}
-      </div>
+      </SearchArea>
       <PokemonList searchTerm={filteredSearchTerm} />
-    </div>
+    </Container>
   );
 }
 

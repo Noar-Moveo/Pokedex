@@ -1,22 +1,45 @@
 import styled from "styled-components";
 
+export const SearchArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 100%;
+  padding: 10px 0; 
+  margin-bottom: 14px;
+  gap: 3px;
+  @media (max-width: 600px)  {
+    margin-top: 200px;
+    padding: 0px;
+    width: 80%;
+    //border: 4px solid pink;
+    //gap: 4px;
+  }
+`;
+
 
 export const SearchPopup = styled.div`
   width: 400px;
   height: auto; 
   min-height: 120px; 
   position: absolute;
-  top: 165px;
-  left: 427px;
+  top: 177px;
+  left: 700px;
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   border-radius: 10px;
   background-color: #FFF;
-  border: 1px solid #DDD;
-  z-index: 1000;
+  //border: 1px solid #DDD;
   opacity: 1; 
+  transform: translateX(-50%); 
+  @media (max-width: 600px)  {
+    margin-top: 75px;
+    //padding: 0px;
+    left: 155px;
+    width: 43%;
+    //border: 4px solid yellow;
+  }
 `;
 
 export const SearchItem = styled.div`
@@ -49,4 +72,5 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px; 
+  //border: 4px solid yellow;
 `;
