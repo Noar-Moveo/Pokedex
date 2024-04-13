@@ -22,6 +22,7 @@ export const DetailContainer = styled.div`
   //border: 4px solid black;
   padding: 0px;
   left: 59px;
+  top: 210px;
 }
 
 `;
@@ -46,6 +47,7 @@ export const DetailHeader = styled.h1`
     position: relative; 
     margin: 130px; 
     left: 240px;
+    top: 00px;
   }
 
 `;
@@ -60,6 +62,7 @@ export const ImageHeaderContainer = styled.div`
   @media(max-width: 768px) {
     //position: absolute;
     display: flex;
+    //top: 10px;
   }
 `; 
 
@@ -73,10 +76,12 @@ export const PokemonImage = styled.img`
   opacity: 1;
   @media (max-width: 768px) {
     position: fixed;
-    top: 140px;
+    top: 240px;
     left: 80px;
-    width: 396px; 
-    height: 408px; 
+    //width: 396px; 
+    width: 266px; 
+    //height: 408px; 
+    height: 308px; 
     max-width: 260px; 
     margin: 0 auto;
   }
@@ -96,7 +101,7 @@ export const DescriptionHeadline = styled.h2`
   background: transparent; 
   @media (max-width: 768px) {
     position: fixed;
-    top: 600px;
+    top: 640px;
     left: 147px;
     width: 396px; 
     height: 408px; 
@@ -124,7 +129,7 @@ export const DescriptionText = styled.p`
   box-sizing: border-box; 
   @media (max-width: 768px) {
     position: fixed;
-    top: 630px;
+    top: 670px;
     left: 73px;
     width: 396px; 
     height: 408px;
@@ -203,7 +208,7 @@ export const StatsHeadline = styled.div`
   font-weight: bold;
   @media (max-width: 768px) {
     position: fixed;
-    top: 700px;
+    top: 740px;
     left: 178px;
     width: 396px; 
     height: 408px;
@@ -225,8 +230,8 @@ export const StatsContainer = styled.div`
   @media (max-width: 768px) {
     position: fixed;
     font-size: 10px;
-    top: 722px;
-    left: 135px;
+    top: 762px;
+    left: 125px;
     gap: 0px 0px;
     width: auto;
     height: auto; 

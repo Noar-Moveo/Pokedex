@@ -24,12 +24,13 @@ export const SearchPopup = styled.div`
   min-height: 120px; 
   position: absolute;
   top: 177px;
-  left: 700px;
+  left: 703px;
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   background-color: #FFF;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15); 
   //border: 1px solid #DDD;
   opacity: 1; 
   transform: translateX(-50%); 
