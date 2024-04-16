@@ -88,4 +88,12 @@ export const API_URL = "https://pokeapi.co/api/v2/pokemon?limit=100000";
     fairy:   '#D685AD'
 
 };
+
+export interface Location {
+  lat: number;
+  lng: number;
+}
+
+
+
   

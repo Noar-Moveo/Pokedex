@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Outlet } from "react-router-dom";
 import axios from "axios";
 import {
   PokemonDetails,
@@ -23,16 +23,21 @@ import {
   ArrowIndicator,
   Number,
   TypeBox,
-  ImageHeaderContainer
+  ImageHeaderContainer,
+  DirectionsButton,
 } from "../styles/PokemonDetailStyles";
+//import { useRandomLocation } from "../hooks/useRandomLocation";
+import { useNavigate } from "react-router-dom";
 
 const PokemonDetailPage = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [pokemonDetail, setPokemonDetail] = useState<PokemonDetails | null>(
     null
   );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<ErrorType>(null);
+  //const location = useRandomLocation();
 
   const formattedId = useMemo(() => {
     return `#${id?.toString().padStart(3, "0") || ""}`;
@@ -92,52 +97,62 @@ const PokemonDetailPage = () => {
     );
   };
 
-   const formatStatName = (name: string) => {
-    return name.toLowerCase() === "hp" ? "HP" : name
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+  const formatStatName = (name: string) => {
+    return name.toLowerCase() === "hp"
+      ? "HP"
+      : name
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
   };
-  
 
-  return (
-    <DetailContainer>
-      <ImageHeaderContainer>
-        <DetailHeader>{pokemonDetail.name.toUpperCase()}</DetailHeader>
-        <PokemonImage
-          src={pokemonDetail.sprites.front_default}
-          alt={pokemonDetail.name}
-          draggable="false"
-        />
-        <TypeContainer>
-          {pokemonDetail.types.map((typeInfo) => getTypeBox(typeInfo.type.name))}
-        </TypeContainer>
-      </ImageHeaderContainer>
-      {/* Render description, stats, and other details here */}
-      <DescriptionHeadline>Description</DescriptionHeadline>
-      <DescriptionText>{pokemonDetail.description}</DescriptionText>
-      <StatsHeadline>Stats</StatsHeadline>
-      <StatsContainer>
-        {pokemonDetail.stats.map((stat, index) => (
-          <StatItem key={index}>
-            <span>{formatStatName(stat.stat.name)}: </span>
-            <span>{stat.base_stat}</span>
-          </StatItem>
-        ))}
-        <StatItem>
-          <span>Total:</span>
-          <span>{totalStats}</span>
-        </StatItem>
-      </StatsContainer>
-      <VerticalLine />
-      <Link to="/">
-        <BackButton>Home Page</BackButton>
-      </Link>
-      <ArrowIndicator>→</ArrowIndicator>
-      <Number>{formattedId}</Number>
-    </DetailContainer>
-  );
+  // const handleShowDirectionClick = () => {
+  //   navigate(`/pokemon/${id}/location`);
+  // };
+
   
+  return (
+    <>
+      <DetailContainer>
+        <ImageHeaderContainer>
+          <DetailHeader>{pokemonDetail.name.toUpperCase()}</DetailHeader>
+          <PokemonImage
+            src={pokemonDetail.sprites.front_default}
+            alt={pokemonDetail.name}
+            draggable="false"
+          />
+          <TypeContainer>
+            {pokemonDetail.types.map((typeInfo) =>
+              getTypeBox(typeInfo.type.name)
+            )}
+          </TypeContainer>
+        </ImageHeaderContainer>
+        <DescriptionHeadline>Description</DescriptionHeadline>
+        <DescriptionText>{pokemonDetail.description}</DescriptionText>
+        <StatsHeadline>Stats</StatsHeadline>
+        <StatsContainer>
+          {pokemonDetail.stats.map((stat, index) => (
+            <StatItem key={index}>
+              <span>{formatStatName(stat.stat.name)}: </span>
+              <span>{stat.base_stat}</span>
+            </StatItem>
+          ))}
+          <StatItem>
+            <span>Total:</span>
+            <span>{totalStats}</span>
+          </StatItem>
+        </StatsContainer>
+        <VerticalLine />
+        <Link to="/">
+          <BackButton>Home Page</BackButton>
+        </Link>
+        <ArrowIndicator>→</ArrowIndicator>
+        <Number>{formattedId}</Number>
+      </DetailContainer>
+      <Outlet /> 
+      <DirectionsButton onClick={() => navigate(`/pokemon/${id}/location`)}>Show Direction</DirectionsButton>
+    </>
+  );
 };
 
 export default PokemonDetailPage;

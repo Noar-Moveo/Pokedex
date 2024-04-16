@@ -51,3 +51,4 @@ export const Name = styled.div`
   color: #373299;
   text-transform: capitalize;
 `;
+

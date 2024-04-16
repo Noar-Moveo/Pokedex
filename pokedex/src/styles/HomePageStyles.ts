@@ -12,12 +12,18 @@ export const Container = styled.div`
   margin-top: 100px;
   margin-right: 11px;
   width: 100%;
-  @media (max-width: 600px)  {
+
+  @media (max-width: 600px) {
     padding: 8px;
     padding-top: 0px;
     margin-top: 0px;
     margin-right: 0px;
     height: 20%;
+    /* height: 100vh;
+    width: 100vw; */
+      //
+      border: 4px solid blue;
+
   }
 `;
 
@@ -33,7 +39,6 @@ export const ListContainer = styled.div`
     padding: 32px 16px;
     //border: 4px solid brown;
     margin: 0px;
-
   }
 `;
 
@@ -63,7 +68,6 @@ export const Box = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  
 `;
 
 export const HomeBox = styled(Box)`
@@ -71,7 +75,7 @@ export const HomeBox = styled(Box)`
   color: black;
   margin-left: 0px;
   @media (max-width: ${mobileBreakpoint}) {
-    display: none; 
+    display: none;
   }
 `;
 
@@ -80,7 +84,7 @@ export const FavoriteBox = styled(Box)`
   color: white;
   margin-left: 0px;
   @media (max-width: ${mobileBreakpoint}) {
-    display: none; 
+    display: none;
   }
 `;
 
@@ -88,7 +92,7 @@ export const BoxText = styled.div`
   font-size: 18px;
   font-weight: bold;
   @media (max-width: ${mobileBreakpoint}) {
-    display: none; 
+    display: none;
   }
 `;
 
@@ -100,38 +104,36 @@ export const NonClickableBox = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: ${mobileBreakpoint}) {
-    display: none; 
+    display: none;
   }
 `;
 
 export const SearchInput = styled.input`
-  width: 100%; 
-  max-width: 434px; 
+  width: 100%;
+  max-width: 434px;
   height: 37px;
   border-radius: 9px;
   border: 1px solid #02016680;
   background: #f7f7f9;
-  margin: 5px 0; 
-  
-
+  margin: 5px 0;
 `;
 
 export const SearchButton = styled.button`
-  width: 100%; 
-  max-width: 87px; 
+  width: 100%;
+  max-width: 87px;
   height: 36px;
   border-radius: 9px;
   background: #373299;
   color: #ffffff;
   cursor: pointer;
   border: none;
-  align-self: center; 
-  margin: 5px 0; 
-  text-align: center; 
+  align-self: center;
+  margin: 5px 0;
+  text-align: center;
   justify-content: center;
   align-items: center;
   padding: 0;
-  @media (max-width: 600px)  {
+  @media (max-width: 600px) {
     font-size: 18px;
   }
 `;
@@ -139,7 +141,7 @@ export const SearchButton = styled.button`
 export const LoadMoreButton = styled.button`
   width: 210px;
   height: 36px;
-  margin: 60px auto; 
+  margin: 60px auto;
   display: block;
   border-radius: 9px;
   border: 1px solid #373299;
@@ -170,7 +172,3 @@ export const Logo = styled.img`
     left: 80px;
   }
 `;
-
-
-
-

@@ -313,3 +313,20 @@ export const Number = styled.div`
   left: 15px; 
   color: #020166;
 `;
+
+
+
+
+export const DirectionsButton = styled.button`
+  position: absolute;
+  background-color: #4CAF50;  
+  top: 170px; 
+  right: 290px; 
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+`;

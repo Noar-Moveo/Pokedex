@@ -1,13 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import PokemonDetailPage from './pages/PokemonDetailPage';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import PokemonDetailPage from "./pages/PokemonDetailPage";
+import PokemonLocationPage from "./pages/PokemonLocationPage";
 import {
-    TopLine,
-    HomeBox,
-    FavoriteBox,
-    BoxText,
-    Logo,
-    NonClickableBox
+  TopLine,
+  HomeBox,
+  FavoriteBox,
+  BoxText,
+  Logo,
+  NonClickableBox,
 } from "./styles/HomePageStyles";
 import LogoImage from "./LogoImage.png";
 import { LayoutProps } from "./data/types";
@@ -18,11 +19,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <TopLine>
         <Logo src={LogoImage} alt="Pokédex Logo" />
-        <HomeBox><BoxText>Home</BoxText></HomeBox>
-        <FavoriteBox><BoxText>Favorite</BoxText></FavoriteBox>
+        <HomeBox>
+          <BoxText>Home</BoxText>
+        </HomeBox>
+        <FavoriteBox>
+          <BoxText>Favorite</BoxText>
+        </FavoriteBox>
         <NonClickableBox />
       </TopLine>
-      <main style={{ backgroundColor: 'white' }}>{children}</main> 
+      <main style={{ backgroundColor: "white" }}>{children}</main>
     </>
   );
 };
@@ -34,10 +39,12 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/pokemon/:id" element={<PokemonDetailPage />} />
+          <Route path="/pokemon/:id/location" element={<PokemonLocationPage />} />
         </Routes>
       </Layout>
     </Router>
   );
 }
+
 
 export default App;
