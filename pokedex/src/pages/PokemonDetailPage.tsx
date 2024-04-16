@@ -106,10 +106,7 @@ const PokemonDetailPage = () => {
           .join(" ");
   };
 
-  // const handleShowDirectionClick = () => {
-  //   navigate(`/pokemon/${id}/location`);
-  // };
-
+  
   
   return (
     <>

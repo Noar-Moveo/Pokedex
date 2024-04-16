@@ -6,6 +6,7 @@ import {
   containerStyle,
   MoveoLocation,
   apiKey,
+  TravelMode
 } from "../data/LocationTypes";
 
 const MapComponent: React.FC<MapComponentProps> = ({
@@ -17,9 +18,12 @@ const MapComponent: React.FC<MapComponentProps> = ({
 }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [travelMode, setTravelMode] = useState<string>("WALKING");
+  const [travelMode, setTravelMode] = useState<TravelMode>(TravelMode.WALKING);
   const [directionsRenderer, setDirectionsRenderer] = useState<google.maps.DirectionsRenderer | null>(null);
   const prevDirectionsRenderer = useRef<google.maps.DirectionsRenderer | null>(null);
+
+  //const apiKey = import.meta.env.VITE_API_KEY;
+
 
   useEffect(() => {
     async function loadMap() {
@@ -56,7 +60,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
         prevDirectionsRenderer.current.setMap(null); 
       }
 
-      if (travelMode === "WALKING") {
+      if (travelMode === TravelMode.WALKING) {
         const newDirectionsRenderer = addMarkersAndRoute(
           map,
           pokemonIcon,
@@ -67,7 +71,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
         );
         setDirectionsRenderer(newDirectionsRenderer);
         prevDirectionsRenderer.current = newDirectionsRenderer;
-      } else if (travelMode === "DRIVING") {
+      } else if (travelMode === TravelMode.DRIVING) {
         const newDirectionsRenderer = addMarkersAndRoute(
           map,
           pokemonIcon,
@@ -83,11 +87,12 @@ const MapComponent: React.FC<MapComponentProps> = ({
   }, [map, isLoadedMap, pokemonLocation, moveoIcon, pokemonIcon, travelMode]);
 
   const handleShowDirectionsWalk = () => {
-    setTravelMode("WALKING");
+    setTravelMode(TravelMode.WALKING);
+
   };
 
   const handleShowDirectionsDrive = () => {
-    setTravelMode("DRIVING");
+    setTravelMode(TravelMode.DRIVING);
   };
 
   return (

@@ -37,3 +37,8 @@ export interface MapComponentProps {
   };
 
   export type GenerateLocationFunction = () => Location;
+
+  export enum TravelMode {
+    WALKING = "WALKING",
+    DRIVING = "DRIVING"
+}
