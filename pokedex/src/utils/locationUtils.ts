@@ -31,7 +31,6 @@ export const generateRandomPokemonLocation = (): Location => {
   return { lat: latitude, lng: longitude };
 };
 
-
 export const addMarkersAndRoute = (
   map: google.maps.Map,
   originIcon: string,
@@ -39,56 +38,113 @@ export const addMarkersAndRoute = (
   origin: google.maps.LatLngLiteral,
   destination: google.maps.LatLngLiteral,
   mode: google.maps.TravelMode = google.maps.TravelMode.DRIVING,
-  setDirections: React.Dispatch<React.SetStateAction<google.maps.DirectionsResult | null>>
-  ) => {
-    setDirections(null);
-    if (!map) {
-      console.error("Map is null. Cannot add markers and route.");
-      return;
-    }
-    
-    const createMarker = (position: google.maps.LatLngLiteral, iconUrl: string) => {
-      return new google.maps.Marker({
-        position: position,
-        map: map,
-        icon: {
-          url: iconUrl,
-          scaledSize: new google.maps.Size(33, 33),
-        },
-      });
-    };
-    
-    const originMarker = createMarker(origin, originIcon);
-    const destinationMarker = createMarker(destination, destinationIcon);
-    
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer({
+): google.maps.DirectionsRenderer => {
+  if (!map) {
+    console.error("Map is null. Cannot add markers and route.");
+    throw new Error("Map is null. Cannot add markers and route.");
+  }
+
+  const createMarker = (position: google.maps.LatLngLiteral, iconUrl: string) => {
+    return new google.maps.Marker({
+      position: position,
       map: map,
-      suppressMarkers: true
+      icon: {
+        url: iconUrl,
+        scaledSize: new google.maps.Size(33, 33),
+      },
     });
-    console.log(destination);
+  };
+
+  const originMarker = createMarker(origin, originIcon);
+  const destinationMarker = createMarker(destination, destinationIcon);
+
+  const directionsService = new google.maps.DirectionsService();
+  const directionsRenderer = new google.maps.DirectionsRenderer({
+    map: map,
+    suppressMarkers: true
+  });
+
+  const originPosition = originMarker.getPosition();
+  const destinationPosition = destinationMarker.getPosition();
+
+  if (originPosition && destinationPosition) {
+    const request: google.maps.DirectionsRequest = {
+      origin: originPosition,
+      destination: destinationPosition,
+      travelMode: mode,
+    };
+
+    directionsService.route(request, (result, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        directionsRenderer.setDirections(result);
+      } else {
+        console.error("Error fetching directions:", status);
+      }
+    });
+  } else {
+    console.error("Markers' positions are undefined.");
+  }
+
+  return directionsRenderer;
+};
+
+// export const addMarkersAndRoute = (
+//   map: google.maps.Map,
+//   originIcon: string,
+//   destinationIcon: string,
+//   origin: google.maps.LatLngLiteral,
+//   destination: google.maps.LatLngLiteral,
+//   mode: google.maps.TravelMode = google.maps.TravelMode.DRIVING,
+//   setDirections: React.Dispatch<React.SetStateAction<google.maps.DirectionsResult | null>>
+//   ) => {
+//     setDirections(null);
+//     if (!map) {
+//       console.error("Map is null. Cannot add markers and route.");
+//       return;
+//     }
+    
+//     const createMarker = (position: google.maps.LatLngLiteral, iconUrl: string) => {
+//       return new google.maps.Marker({
+//         position: position,
+//         map: map,
+//         icon: {
+//           url: iconUrl,
+//           scaledSize: new google.maps.Size(33, 33),
+//         },
+//       });
+//     };
+    
+//     const originMarker = createMarker(origin, originIcon);
+//     const destinationMarker = createMarker(destination, destinationIcon);
+    
+//     const directionsService = new google.maps.DirectionsService();
+//     const directionsRenderer = new google.maps.DirectionsRenderer({
+//       map: map,
+//       suppressMarkers: true
+//     });
+//     console.log(destination);
 
     
     
-    const originPosition = originMarker.getPosition();
-    const destinationPosition = destinationMarker.getPosition();
+//     const originPosition = originMarker.getPosition();
+//     const destinationPosition = destinationMarker.getPosition();
     
-    if (originPosition && destinationPosition) {
-      const request: google.maps.DirectionsRequest = {
-        origin: originPosition,
-        destination: destinationPosition,
-        travelMode: mode,
-      };
+//     if (originPosition && destinationPosition) {
+//       const request: google.maps.DirectionsRequest = {
+//         origin: originPosition,
+//         destination: destinationPosition,
+//         travelMode: mode,
+//       };
       
-      directionsService.route(request, (result, status) => {
-        if (status === google.maps.DirectionsStatus.OK) {
-          directionsRenderer.setDirections(result);
-        } else {
-          console.error("Error fetching directions:", status);
-        }
-      });
-    } else {
-      console.error("Markers' positions are undefined.");
-    }
-  };
+//       directionsService.route(request, (result, status) => {
+//         if (status === google.maps.DirectionsStatus.OK) {
+//           directionsRenderer.setDirections(result);
+//         } else {
+//           console.error("Error fetching directions:", status);
+//         }
+//       });
+//     } else {
+//       console.error("Markers' positions are undefined.");
+//     }
+//   };
   

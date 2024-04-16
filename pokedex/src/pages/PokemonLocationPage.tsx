@@ -8,7 +8,6 @@ import MapComponent from "../components/PokemonMap";
 import {
   LocationContainer,
   LocationHeader,
-  CoordinatesText,
   StyledLink,
 } from "../styles/PokemonLocationStyles";
 import BallIcon from "../assets/pokemonIcon.png";
