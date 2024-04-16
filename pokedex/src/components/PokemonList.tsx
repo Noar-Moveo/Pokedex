@@ -1,24 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePokemonData } from "../hooks/usePokemonData";
 import PokemonCard from "./PokemonCard";
-import { ListContainer } from "../styles/PokemonCardStyles";
-import { LoadMoreButton } from "../styles/HomePageStyles";
-import { PokemonListProps, Pokemon } from "../data/types";
+import { ListContainer, LoadMoreButton } from "../styles/HomePageStyles";
+import { PokemonListProps } from "../data/types";
 
 const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
-  const { data: pokemons, loading, error } = usePokemonData();
-  const [displayLimit, setDisplayLimit] = useState(12);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  
+  const [displayLimit, setDisplayLimit] = useState(isMobile ? 4 : 12);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setDisplayLimit(window.innerWidth < 768 ? 4 : 12);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const { data, loading, error } = usePokemonData(); 
+  const pokemons = Array.isArray(data) ? data : [];
 
   const filteredPokemons = searchTerm
-    ? pokemons
-        .filter((pokemon: Pokemon) =>
-          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .slice(0, displayLimit)
+    ? pokemons.filter((pokemon) => {
+        const searchTermLower = searchTerm.toLowerCase();
+        const nameMatch = pokemon.name.toLowerCase().includes(searchTermLower);
+        const idMatch = pokemon.id.toString().includes(searchTermLower);
+        const typeMatch = pokemon.types?.some(type => 
+          type.type.name.toLowerCase().includes(searchTermLower)
+        ) || false;
+
+        return nameMatch || idMatch || typeMatch;
+      }).slice(0, displayLimit)
     : pokemons.slice(0, displayLimit);
 
   const handleLoadMore = () => {
-    setDisplayLimit((prevLimit) => prevLimit + 12);
+    setDisplayLimit((prevLimit) => prevLimit + (isMobile ? 4 : 12));
   };
 
   if (loading) return <div>Loading...</div>;
@@ -27,7 +46,7 @@ const PokemonList: React.FC<PokemonListProps> = ({ searchTerm }) => {
   return (
     <>
       <ListContainer>
-        {filteredPokemons.map((pokemon: Pokemon) => (
+        {filteredPokemons.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}
             id={pokemon.id}

@@ -1,27 +1,7 @@
 import styled from "styled-components";
 
-export const ListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px 26.73px;
-  margin: 174px auto 0;
-  padding: 32px;
-  justify-content: center;
-  align-items: center;
 
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
 
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    padding: 32px 16px;
-  }
-`;
 
 export const Card = styled.div`
   width: 267.29px;
@@ -36,6 +16,7 @@ export const Card = styled.div`
   border-radius: 5px;
   overflow: hidden;
   background-color: #f7f7f9;
+  //border: 4px solid darkblue;
 
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -57,6 +38,7 @@ export const PokemonImage = styled.img`
   width: 267.29px;
   height: 210px;
   display: block;
+  //border: 4px solid pink;
 `;
 
 export const Name = styled.div`
@@ -69,3 +51,4 @@ export const Name = styled.div`
   color: #373299;
   text-transform: capitalize;
 `;
+

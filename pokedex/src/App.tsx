@@ -1,33 +1,24 @@
-import { useState } from "react";
-import PokemonList from "./components/PokemonList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import PokemonDetailPage from "./pages/PokemonDetailPage";
+import PokemonLocationPage from "./pages/PokemonLocationPage";
 import {
   TopLine,
   HomeBox,
   FavoriteBox,
   BoxText,
-  SearchButton,
-  SearchInput,
   Logo,
-  NonClickableBox
+  NonClickableBox,
 } from "./styles/HomePageStyles";
 import LogoImage from "./LogoImage.png";
+import { LayoutProps } from "./data/types";
 
-function App() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isSearchEnabled, setIsSearchEnabled] = useState(false);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchEnable = () => {
-    setIsSearchEnabled(true);
-  };
-
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
+    <>
       <TopLine>
-      <Logo src={LogoImage} alt="Pokédex Logo" />
+        <Logo src={LogoImage} alt="Pokédex Logo" />
         <HomeBox>
           <BoxText>Home</BoxText>
         </HomeBox>
@@ -36,17 +27,24 @@ function App() {
         </FavoriteBox>
         <NonClickableBox />
       </TopLine>
-      <SearchInput
-        type="text"
-        placeholder="Search"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        disabled={!isSearchEnabled}
-      />
-      <SearchButton onClick={handleSearchEnable}>Search</SearchButton>
-      <PokemonList searchTerm={searchTerm} />
-    </div>
+      <main style={{ backgroundColor: "white" }}>{children}</main>
+    </>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/pokemon/:id" element={<PokemonDetailPage />} />
+          <Route path="/pokemon/:id/location" element={<PokemonLocationPage />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
+
 
 export default App;
